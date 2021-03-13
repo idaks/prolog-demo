@@ -77,9 +77,9 @@ test_contained_all :-
 	Qid2 :: Q2,
 	Qid1 \= Qid2,      % to avoid testing with oneself
 	copy_term(Q1,Q1P),
-	numbervars(Q1P, '$x',1,_),
+	numbervars(Q1P, 1,_, [functor_name('$x')]),
 	copy_term(Q2,Q2P),
-	numbervars(Q2P, '$y',1,_),
+	numbervars(Q2P, 1,_, [functor_name('$y')]),
 	(contained(Q1, Q2, Sigma)
 	 ->	format('~n~w => ~w; sigma = ~p~n',[Qid1, Qid2,Sigma]), % containment holds
 		format('  ~p =>~n  ~p~n', [Q1P,Q2P]) 
