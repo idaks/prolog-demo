@@ -1,0 +1,43 @@
+
+
+
+
+%q_x :: q(A,B,C) <- [a(A),c(C,C),c(B,C)].
+%q_y :: q(A,B,C) <- [a(D),a(E),c(C,C),c(A,B)].
+
+q1 :: answer(X,Y) <- [p(X,Y)].
+q2 :: answer(X,X) <- [p(X,X)].
+
+%% ullman21_19_1 :: answer(X,Y) <- [a(X,Z), b(Z,Y)].
+%% ullman21_19_2 :: answer(A,B) <- [a(A,C), b(D,B), a(A,D)]. 
+
+
+%q1 :: answer(X) <- [student(X,Dept), student(X,cs)].
+%q2 :: answer(X) <- [student(X,Dept), advisor(X,Adv),dept(Adv,cs)].
+%q3 :: answer(X) <- [student(X,Dept)].
+
+
+
+/*
+
+q_1 :: q(X_1, X_2, X_3) <-
+   [p(Y_1, Y_2, X_3), p(X_1, Y_2, Y_3), p(Y_4, X_2, Y_3), p(X_1, Y_5, Y_6), p(Y_1, Y_5, X_3)].
+
+
+q_2 :: q(X_1, X_2, X_3) <-
+  [p(Z_1, Z_2, X_3), p(X_1, Z_2, Z_3), p(Z_4, X_2, Z_3)].
+
+
+q_3 :: q(X) <- [p(X,X),p(X,Y)].
+q_4 :: q(Y) <- [p(X,X),p(X,Y)].
+q_5 :: q(X,Y) <- [p(X,X),p(X,Y)].
+q_6 :: q <- [p(X,X),p(X,Y)].
+
+
+
+q_a ::  q(X) <- [ d(X), p(X,X), p(X,Y) ].
+q_b ::  q(X) <- [ d(X), p(Z,Z) ].
+q_c ::  q(X) <- [ d(X), p(Y,Y) ].
+
+
+*/

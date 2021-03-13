@@ -1,0 +1,28 @@
+% Q1 contained in Q2  <=>  Q2 has an answer over the canonical_db(Q1)
+% Example 21.19 from Ullman: Complete Book
+% q1 :: answer(X,Y) <- [a(X,Z), b(Z,Y)].
+% q2 :: answer(A,B) <- [a(A,C), b(D,B), a(A,D)]. 
+
+% Q1 \subseteq Q2
+q12(x,y). % canonical(Q1): head ... 
+a1(x,z).  % ... body
+b1(z,y).  % ... body
+
+% expanded head bindings for Q2 = containment mapping vars(Q2) -> vars(Q1) 
+q2(A,B,C,D) :-  
+	a1(A,C),  % must satisfy ...
+	b1(D,B),  % ... each goal
+	a1(A,D),  % ... in the body of Q2
+	q12(A,B). % ... and get the same head as Q1
+
+
+% Q2 \subseteq Q1
+q21(a,b).
+a2(a,c).
+b2(d,b).
+a2(a,d).
+
+q1(X,Y,Z) :- 
+	a2(X,Z), 
+	b2(Z,Y),
+	q21(X,Y).

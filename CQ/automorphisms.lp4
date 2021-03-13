@@ -1,0 +1,23 @@
+% Here we assume we have h/4, the "highest conceptual resolution"
+% query answers given. Each answer implies a homomorphism
+%   h: D^hike --> B_D^hike
+% i.e., the canonical hike DB to the Herbrand base of that DB.
+
+
+% To map or not to map, that's the question: 
+m(X,Y) ; out(X,Y) :- dom(X), dom(Y).
+
+% Homomorphism constraint: edge g1(x,y) => edge g2(x,y); false otherwise: 
+false :- m(X,IX), m(U, IU), m(V,IV), m(Y,IY), h(X,U,V,Y), not h(IX,IU,IV,IY).
+
+% Must use every vertex (domain element) in the mapping m:
+used(X) :- m(X,_).
+:- #count{X: dom(X), not used(X)} > 0.
+
+% Mapping m is a function:
+false :- m(X,Y),m(X,Z),Y!=Z.
+
+:- false.
+
+
+#show m/2.

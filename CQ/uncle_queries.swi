@@ -1,0 +1,42 @@
+
+1:: uncle(E,A) <- [male(A),father(E,B),father(B,C),father(A,C),neq(B,A)].
+2:: uncle(E,A) <- [male(A),mother(E,B),father(B,C),father(A,C),neq(B,A)].
+3:: uncle(E,A) <- [male(A),father(E,B),mother(B,C),father(A,C),neq(B,A)].
+4:: uncle(E,A) <- [male(A),mother(E,B),mother(B,C),father(A,C),neq(B,A)].
+5:: uncle(E,A) <- [male(A),father(E,B),father(B,C),mother(A,C),neq(B,A)].
+6:: uncle(E,A) <- [male(A),mother(E,B),father(B,C),mother(A,C),neq(B,A)].
+7:: uncle(E,A) <- [male(A),father(E,B),mother(B,C),mother(A,C),neq(B,A)].
+8:: uncle(E,A) <- [male(A),mother(E,B),mother(B,C),mother(A,C),neq(B,A)].
+9:: uncle(E,A) <- [father(E,B),spouse(C,A),female(C),father(B,D),father(C,D),neq(B,C)].
+10:: uncle(E,A) <- [mother(E,B),spouse(C,A),female(C),father(B,D),father(C,D),neq(B,C)].
+11:: uncle(E,A) <- [father(E,B),spouse(C,A),female(C),mother(B,D),father(C,D),neq(B,C)].
+12:: uncle(E,A) <- [mother(E,B),spouse(C,A),female(C),mother(B,D),father(C,D),neq(B,C)].
+13:: uncle(E,A) <- [father(E,B),spouse(C,A),female(C),father(B,D),mother(C,D),neq(B,C)].
+14:: uncle(E,A) <- [mother(E,B),spouse(C,A),female(C),father(B,D),mother(C,D),neq(B,C)].
+15:: uncle(E,A) <- [father(E,B),spouse(C,A),female(C),mother(B,D),mother(C,D),neq(B,C)].
+16:: uncle(E,A) <- [mother(E,B),spouse(C,A),female(C),mother(B,D),mother(C,D),neq(B,C)].
+17:: uncle(E,A) <- [male(A),father(E,B),spouse(B,C),father(C,D),father(A,D),neq(C,A)].
+18:: uncle(E,A) <- [male(A),mother(E,B),spouse(B,C),father(C,D),father(A,D),neq(C,A)].
+19:: uncle(E,A) <- [male(A),father(E,B),spouse(B,C),mother(C,D),father(A,D),neq(C,A)].
+20:: uncle(E,A) <- [male(A),mother(E,B),spouse(B,C),mother(C,D),father(A,D),neq(C,A)].
+21:: uncle(E,A) <- [male(A),father(E,B),spouse(B,C),father(C,D),mother(A,D),neq(C,A)].
+22:: uncle(E,A) <- [male(A),mother(E,B),spouse(B,C),father(C,D),mother(A,D),neq(C,A)].
+23:: uncle(E,A) <- [male(A),father(E,B),spouse(B,C),mother(C,D),mother(A,D),neq(C,A)].
+24:: uncle(E,A) <- [male(A),mother(E,B),spouse(B,C),mother(C,D),mother(A,D),neq(C,A)].
+
+% The following integrity constraint IC can never be true (no X can be
+% both father and mother). Therefore, for any Q such that Q -> IC, we
+% know that Q is unsatisfiable since IC is.
+ic(1) :: false(chtg(X)) <- [father(_,X), mother(_,X)].
+
+
+% We may know that the database does not contain grandfathers
+% through the father's side:
+% ic(2) :: false(no_fatherly_grandpa(X,Y,Z)) <- [father(X,Y), father(Y,Z)].
+
+% Finally, let's say that the relations spouse/2 and male/1 are temporarily
+% unavailable. Again, we can use the query implication reasoner to
+% eliminate the unsatisfiable subqueries:
+%ic(3) :: false(spouse_not_available(X,Y)) <- [spouse(X,Y)].
+%ic(4) :: false(male_not_available(X)) <- [male(X)].
+

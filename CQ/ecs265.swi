@@ -1,0 +1,25 @@
+
+% q1:: ans(X,Y) <- [r(X,Y), g(Y,Z)].
+% q2:: ans(A,B) <- [r(A,B), r(A,C)].
+
+
+q1 ::  ans(X,Y,Z) <- [p(V,U,Z), p(X,U,S), p(U,Y,S), p(X,W,T), p(V,W,Z)].
+q2 ::  ans(A,B,C) <- [p(E,F,C), p(A,F,G), p(D,B,G)].
+
+
+% The following integrity constraint IC can never be true (no X can be
+% both father and mother). Therefore,for any Q such that Q -> IC,we
+% know that Q is unsatisfiable since IC is.
+%ic(1) :: false(chtg(X)) <- [father(_,X),mother(_,X)].
+
+
+% We may know that the database does not contain grandfathers
+% through the father's side:
+%ic(2) :: false(no_fatherly_grandpa(X,Y,Z)) <- [father(X,Y),father(Y,Z)].
+
+% Finally,let's say that the relations spouse/2 and male/1 are temporarily
+% unavailable. Again,we can use the query implication reasoner to
+% eliminate the unsatisfiable subqueries:
+%ic(3) :: false(spouse_not_available(X,Y)) <- [spouse(X,Y)].
+%ic(4) :: false(male_not_available(X)) <- [male(X)].
+
